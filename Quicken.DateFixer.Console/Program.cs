@@ -5,7 +5,10 @@ using System.Text.RegularExpressions;
 
 try
 {
-    string fileText = File.ReadAllText(@"E:\Downloads\Statement.qif");
+    var accountName = "Ella";
+    var filePath = @"E:\Downloads\Statement.qif";
+
+    string fileText = File.ReadAllText(filePath);
 
     var splitText = fileText.Split('\n');
 
@@ -25,7 +28,7 @@ try
 
     var header = new StringBuilder();
     header.AppendLine("!Account");
-    header.AppendLine("NIzzy 123 Mini");
+    header.AppendLine($"N{accountName} 123 Mini");
     header.AppendLine("TBank");
     header.AppendLine("^");
 
