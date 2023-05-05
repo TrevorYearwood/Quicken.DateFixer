@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 try
 {
-    var accountName = "Ella";
+    var accountName = "Izzy";
     var filePath = @"E:\Downloads\Statement.qif";
 
     string fileText = File.ReadAllText(filePath);
@@ -34,7 +34,7 @@ try
 
     fileText = header.ToString() + string.Join("\n", splitText);
 
-    File.WriteAllText(@"E:\Downloads\StatementNEW.qif", fileText);
+    File.WriteAllText(@"E:\Downloads\Statement{accountName}NEW.qif", fileText);
 
     Console.WriteLine(fileText);
 }
