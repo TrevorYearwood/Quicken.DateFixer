@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Quicken.DateFixer.Api.DTOs;
 using Quicken.DateFixer.Api.Services;
 
 namespace Quicken.DateFixer.Api.Controllers
@@ -27,16 +26,12 @@ namespace Quicken.DateFixer.Api.Controllers
 
                 var filePath = Path.GetTempFileName();
 
-                var fileName = fileUpload.FileName.Split("_")[0];
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await fileUpload.CopyToAsync(stream);
+                }
 
-                //Check filename, check if in enum
-
-                //using (var stream = new FileStream(filePath, FileMode.Create))
-                //{
-                //    await fileUpload.CopyToAsync(stream);
-                //}
-
-                var service = await _quickenService.UpdateFile(fileName, filePath);
+                var service = await _quickenService.UpdateFile(fileUpload.FileName, filePath);
 
                 return Ok("File uploaded successfully.");
             }

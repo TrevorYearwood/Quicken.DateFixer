@@ -6,10 +6,16 @@ namespace Quicken.DateFixer.Api.Services
 {
     public class QuickenService : IQuickenService
     {
-        public async Task<string> UpdateFile(string accountName, string filePath)
+        public async Task<string> UpdateFile(string fileName, string filePath)
         {
+            //Getting AccountName
+            var fileSplit = fileName.Split(".");
+            var accountName = fileSplit[0].Split("_")[1];
+
+            //Read File - static File class
             string fileText = File.ReadAllText(filePath);
 
+            //Date Matching
             var splitText = fileText.Split('\n');
 
             string pattern = @"^[D][0-9]{2}[\/][0-9]{2}[\/][0-9]{4}";
@@ -26,6 +32,7 @@ namespace Quicken.DateFixer.Api.Services
                 }
             }
 
+            //Create File Header
             var header = new StringBuilder();
             header.AppendLine("!Account");
             header.AppendLine($"N{accountName} 123 Mini");
@@ -34,6 +41,7 @@ namespace Quicken.DateFixer.Api.Services
 
             fileText = header.ToString() + string.Join("\n", splitText);
 
+            //Write File
             await File.WriteAllTextAsync($"E:\\Downloads\\{accountName}_Statement_NEW.qif", fileText);
 
             return "success";
