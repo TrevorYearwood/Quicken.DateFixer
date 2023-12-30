@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text;
+using System.IO;
+using Microsoft.AspNetCore.Mvc;
+using Quicken.DateFixer.Api.DTOs;
 using Quicken.DateFixer.Api.Services;
 
 namespace Quicken.DateFixer.Api.Controllers
@@ -15,23 +18,18 @@ namespace Quicken.DateFixer.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload(IFormFile fileUpload)
+        public async Task<IActionResult> Upload([FromBody] FileDto fileDto)
         {
             try
             {
-                if (fileUpload is null || fileUpload.Length == 0)
+                if (fileDto is null || string.IsNullOrEmpty(fileDto.Bytes))
                 {
                     return BadRequest("No file uploaded.");
                 }
 
-                var filePath = Path.GetTempFileName();
+                var filePath = await _quickenService.CreateFile(fileDto!);
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await fileUpload.CopyToAsync(stream);
-                }
-
-                var service = await _quickenService.UpdateFile(fileUpload.FileName, filePath);
+                var service = await _quickenService.UpdateFile(fileDto!.AccountName.ToString(), filePath);
 
                 return Ok("File uploaded successfully.");
             }

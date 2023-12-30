@@ -1,17 +1,23 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Text;
+using Quicken.DateFixer.Api.DTOs;
 
 namespace Quicken.DateFixer.Api.Services
 {
     public class QuickenService : IQuickenService
     {
-        public async Task<string> UpdateFile(string fileName, string filePath)
+        public async Task<string> CreateFile(FileDto fileDto)
         {
-            //Getting AccountName
-            var fileSplit = fileName.Split(".");
-            var accountName = fileSplit[0].Split("_")[1];
+            var filePath = Path.GetTempFileName();
 
+            await File.WriteAllTextAsync(filePath, fileDto.Bytes);
+
+            return filePath;
+        }
+
+        public async Task<string> UpdateFile(string accountName, string filePath)
+        {
             //Read File - static File class
             string fileText = File.ReadAllText(filePath);
 
