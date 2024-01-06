@@ -5,7 +5,12 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quicken.DateFixer.Api", "Quicken.DateFixer.Api\Quicken.DateFixer.Api.csproj", "{3FECB3B8-1838-400E-B189-1730E7345CE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quicken.DateFixer.Tests", "Quicken.DateFixer.Tests\Quicken.DateFixer.Tests.csproj", "{A2271FFB-4A80-4FCC-B98E-0A9338B7EABA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quicken.DateFixer.Tests", "Quicken.DateFixer.Tests\Quicken.DateFixer.Tests.csproj", "{A2271FFB-4A80-4FCC-B98E-0A9338B7EABA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{B262AF06-EAC9-4345-BB5A-8CC69BD98312}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
