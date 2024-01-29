@@ -1,8 +1,5 @@
-﻿using System.Text;
-using System.IO;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Quicken.DateFixer.Api.DTOs;
-using Quicken.DateFixer.Api.Services;
 
 namespace Quicken.DateFixer.Api.Controllers
 {
@@ -10,33 +7,28 @@ namespace Quicken.DateFixer.Api.Controllers
     [ApiController]
     public class QuickenController : ControllerBase
     {
-        private readonly IQuickenService _quickenService;
+        //private readonly IQuickenService _quickenService = quickenService;
 
-        public QuickenController(IQuickenService quickenService)
-        {
-            _quickenService = quickenService;
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Upload([FromBody] FileDto fileDto)
+        //{
+        //    try
+        //    {
+        //        if (fileDto is null || string.IsNullOrEmpty(fileDto.Bytes))
+        //        {
+        //            return BadRequest("No file uploaded.");
+        //        }
 
-        [HttpPost]
-        public async Task<IActionResult> Upload([FromBody] FileDto fileDto)
-        {
-            try
-            {
-                if (fileDto is null || string.IsNullOrEmpty(fileDto.Bytes))
-                {
-                    return BadRequest("No file uploaded.");
-                }
+        //        var filePath = await _quickenService.CreateFile(fileDto!);
 
-                var filePath = await _quickenService.CreateFile(fileDto!);
+        //        var service = await _quickenService.UpdateFile(fileDto!.AccountName.ToString(), filePath);
 
-                var service = await _quickenService.UpdateFile(fileDto!.AccountName.ToString(), filePath);
-
-                return Ok("File uploaded successfully.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
+        //        return Ok("File uploaded successfully.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //    }
+        //}
     }
 }

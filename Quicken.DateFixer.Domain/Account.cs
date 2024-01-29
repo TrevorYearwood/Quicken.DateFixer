@@ -1,4 +1,4 @@
-﻿namespace Quicken.DateFixer.Api.DTOs
+﻿namespace Quicken.DateFixer.Domain
 {
     public enum Account
     {

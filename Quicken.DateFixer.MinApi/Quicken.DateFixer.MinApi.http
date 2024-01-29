@@ -1,0 +1,6 @@
+@Quicken.DateFixer.MinApi_HostAddress = http://localhost:5027
+
+GET {{Quicken.DateFixer.MinApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
