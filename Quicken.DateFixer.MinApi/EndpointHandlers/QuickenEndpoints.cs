@@ -7,7 +7,7 @@ namespace Quicken.DateFixer.MinApi.EndpointHandlers
 {
     public static class QuickenEndpoints
     {
-        public static async Task<Created> ProcessQuickenFileAsync(IQuickenService quickenService, [FromBody] FileDto fileDto)
+        public static async Task<Created> ProcessQuickenFileAsync(IQuickenService quickenService, [FromForm] FileDto fileDto)
         {
             await quickenService.ProcessFile(fileDto);
 

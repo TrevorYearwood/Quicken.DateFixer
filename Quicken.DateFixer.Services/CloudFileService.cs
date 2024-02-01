@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Text;
+
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 using Quicken.DateFixer.Domain;
 using Quicken.DateFixer.Services.Contracts;
@@ -7,19 +13,53 @@ namespace Quicken.DateFixer.Services
 {
     public class CloudFileService : IFileService
     {
-        public Task<string> CreateFileAsync(IFormFile formFile)
+        private readonly BlobServiceClient _blobServiceClient;
+        private readonly BlobContainerClient _containerClient;
+        private readonly IConfiguration _configuration;
+
+        public CloudFileService(IConfiguration configuration)
         {
-            throw new NotImplementedException();
+            _configuration = configuration;
+            _blobServiceClient = new BlobServiceClient(_configuration["AzureStorage:ConnectionString"]);
+            _containerClient = _blobServiceClient.GetBlobContainerClient(_configuration["AzureStorage:ContainerName"]);
         }
 
-        public Task<string> ReadFileAsync(string filePath)
+        public async Task<string> CreateFileAsync(IFormFile formFile)
         {
-            throw new NotImplementedException();
+            BlobContentInfo response;
+
+            try
+            {
+                response = await _containerClient.UploadBlobAsync(formFile.FileName, formFile.OpenReadStream());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+
+            return formFile.FileName;
         }
 
-        public Task WriteFileAsync(Account accountName, string file)
+        public async Task<string> ReadFileAsync(string fileName)
         {
-            throw new NotImplementedException();
+            var blobClient = _containerClient.GetBlobClient(fileName);
+
+            if (!await blobClient.ExistsAsync())
+            {
+                throw new FileNotFoundException(fileName);
+            }
+
+            var blobDownloadInfo = await blobClient.DownloadContentAsync();
+            return blobDownloadInfo.Value.Content.ToString();
+        }
+
+        public async Task WriteFileAsync(Account accountName, string file)
+        {
+            var blobClient = _containerClient.GetBlobClient($"{accountName}_Statement_NEW.qif");
+
+            using var contentStream = new MemoryStream(Encoding.UTF8.GetBytes(file));
+            await blobClient.UploadAsync(contentStream, true);
         }
     }
 }

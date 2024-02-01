@@ -6,7 +6,7 @@ using Quicken.DateFixer.Domain;
 namespace Quicken.DateFixer.Api.DTOs
 {
     public class FileDto {
-        public IFormFile? FormFile { get; init; } 
+        public IFormFile? File { get; init; } 
 
         [JsonConverter(typeof(JsonStringEnumConverter))] 
         public Account? AccountName {  get; init; } 

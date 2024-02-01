@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quicken.DateFixer.Api", "Quicken.DateFixer.Api\Quicken.DateFixer.Api.csproj", "{3FECB3B8-1838-400E-B189-1730E7345CE0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quicken.DateFixer.Tests", "Quicken.DateFixer.Tests\Quicken.DateFixer.Tests.csproj", "{A2271FFB-4A80-4FCC-B98E-0A9338B7EABA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{B262AF06-EAC9-4345-BB5A-8CC69BD98312}"
@@ -12,11 +10,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quicken.DateFixer.MinApi", "Quicken.DateFixer.MinApi\Quicken.DateFixer.MinApi.csproj", "{9F7A7AC9-9D5F-4B62-8E47-E9C76529CA54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quicken.DateFixer.MinApi", "Quicken.DateFixer.MinApi\Quicken.DateFixer.MinApi.csproj", "{9F7A7AC9-9D5F-4B62-8E47-E9C76529CA54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quicken.DateFixer.Domain", "Quicken.DateFixer.Domain\Quicken.DateFixer.Domain.csproj", "{CF2C4C2B-6B58-427C-838D-E8AF6F062B5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quicken.DateFixer.Domain", "Quicken.DateFixer.Domain\Quicken.DateFixer.Domain.csproj", "{CF2C4C2B-6B58-427C-838D-E8AF6F062B5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quicken.DateFixer.Services", "Quicken.DateFixer.Services\Quicken.DateFixer.Services.csproj", "{0B0CF6A2-88DF-4CC6-95CD-53376555CA08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quicken.DateFixer.Services", "Quicken.DateFixer.Services\Quicken.DateFixer.Services.csproj", "{0B0CF6A2-88DF-4CC6-95CD-53376555CA08}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{82C4DA30-768A-4E44-97E2-4B4562CD4C81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +24,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3FECB3B8-1838-400E-B189-1730E7345CE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FECB3B8-1838-400E-B189-1730E7345CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FECB3B8-1838-400E-B189-1730E7345CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FECB3B8-1838-400E-B189-1730E7345CE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2271FFB-4A80-4FCC-B98E-0A9338B7EABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2271FFB-4A80-4FCC-B98E-0A9338B7EABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2271FFB-4A80-4FCC-B98E-0A9338B7EABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,6 +40,10 @@ Global
 		{0B0CF6A2-88DF-4CC6-95CD-53376555CA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B0CF6A2-88DF-4CC6-95CD-53376555CA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B0CF6A2-88DF-4CC6-95CD-53376555CA08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82C4DA30-768A-4E44-97E2-4B4562CD4C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C4DA30-768A-4E44-97E2-4B4562CD4C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82C4DA30-768A-4E44-97E2-4B4562CD4C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82C4DA30-768A-4E44-97E2-4B4562CD4C81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

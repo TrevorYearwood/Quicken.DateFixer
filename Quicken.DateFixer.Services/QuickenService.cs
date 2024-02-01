@@ -13,10 +13,10 @@ namespace Quicken.DateFixer.Services
 
         public async Task<string> ProcessFile(FileDto fileDto)
         {
-            ArgumentNullException.ThrowIfNull(fileDto.FormFile);
+            ArgumentNullException.ThrowIfNull(fileDto.File);
             ArgumentNullException.ThrowIfNull(fileDto.AccountName);
 
-            var filePath = await _fileService.CreateFileAsync(fileDto.FormFile);
+            var filePath = await _fileService.CreateFileAsync(fileDto.File);
             var accountName = (Account)fileDto.AccountName;
 
             string fileText = await _fileService.ReadFileAsync(filePath);

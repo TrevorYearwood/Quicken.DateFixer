@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Quicken.DateFixer.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,9 +22,6 @@ builder.Services.AddCors(opts =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddTransient<IQuickenService, QuickenService>();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

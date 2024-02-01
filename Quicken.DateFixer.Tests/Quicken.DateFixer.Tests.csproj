@@ -21,8 +21,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Quicken.DateFixer.Api\Quicken.DateFixer.Api.csproj" />
-  </ItemGroup>
-
 </Project>

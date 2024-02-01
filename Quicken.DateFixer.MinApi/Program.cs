@@ -5,19 +5,25 @@ using Quicken.DateFixer.Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication("Bearer").AddJwtBearer();
+
+builder.Services.AddCors(opts =>
+{
+    opts.AddPolicy("ReactApp",
+    policy =>
+            policy.WithOrigins(builder.Configuration["ReactAppUrl"]!)
+                   .AllowAnyHeader()
+                   .AllowAnyMethod());
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IFileService, LocalFileService>();
+builder.Services.AddScoped<IFileService, CloudFileService>();
 builder.Services.AddScoped<IQuickenService, QuickenService>();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
 
@@ -26,8 +32,9 @@ app.UseSwaggerUI();
 
 app.UseAuthorization();
 
-app.RegisterQuickenEndpoints();
+app.UseCors("ReactApp");
 
+app.RegisterQuickenEndpoints();
 app.MapGet("/secret", (ClaimsPrincipal user) => $"Hello {user.Identity?.Name} My secret").RequireAuthorization();
 
 app.Run();
