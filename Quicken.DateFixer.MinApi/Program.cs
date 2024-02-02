@@ -17,6 +17,7 @@ builder.Services.AddCors(opts =>
                    .AllowAnyMethod());
     });
 
+builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,6 +25,9 @@ builder.Services.AddScoped<IFileService, CloudFileService>();
 builder.Services.AddScoped<IQuickenService, QuickenService>();
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
+app.UseDeveloperExceptionPage();
 
 app.UseHttpsRedirection();
 

@@ -2,10 +2,18 @@ version: '3.4'
 
 services:
   quicken.datefixer.minapi:
-    image: ${DOCKER_REGISTRY-}quickendatefixerminapi
+    # image: ${DOCKER_REGISTRY-}quickendatefixerminapi
+    image: yearwoodquickenapi.azurecr.io/yearwoodquickenapi
     build:
       context: .
       dockerfile: Quicken.DateFixer.MinApi/Dockerfile
     ports:
         - "8080:8080"
         - "8081:8081"
+    environment:
+        ASPNETCORE_URLS: "https://+;http://+"
+        ASPNETCORE_HTTPS_PORT: "8081"
+        ASPNETCORE_ENVIRONMENT: "Development"
+    volumes:
+        - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft\usersecrets
+        - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
